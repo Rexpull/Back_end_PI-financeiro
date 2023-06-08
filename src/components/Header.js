@@ -6,7 +6,7 @@ import API from '../axios/Api';
 import 'react-datepicker/dist/react-datepicker.css';
 import CurrencyInputField from 'react-currency-input-field';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -29,7 +29,7 @@ function Header() {
     setShow(false);
   };
 
-  const handleShow = () => setShow(true);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -114,12 +114,6 @@ function Header() {
   return (
     <>
       
-       <div className='nav'>
-          <button onClick={handleShow} className="button-28">
-          <FontAwesomeIcon icon={faPlus} className="fa-icon-plus" /> Criar novo
-          </button>
-        </div>
-    
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>

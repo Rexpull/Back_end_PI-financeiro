@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import API from '../axios/Api';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import { TableRow, TableCell } from '@mui/material';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 import '../styles/index.css';
 import EditModal from './EditModal';
 
@@ -16,6 +18,17 @@ function DataTable({ mhs, refresh }) {
     valor: mhs.valor,
     observacao: mhs.observacao
   });
+
+  const stripeRow = (mhs) => {
+    // Implemente a lógica para aplicar a classe 'table-row-stripe' em linhas ímpares
+    // Você pode usar o índice da linha para determinar se é ímpar ou par
+    // Por exemplo:
+    if (mhs.index % 2 === 0) {
+      return 'table-row-stripe';
+    } else {
+      return '';
+    }
+  };
 
   const deleteMhs = async () => {
     await API.delete('deletemhs.php?id=' + mhs.id);
@@ -49,7 +62,7 @@ function DataTable({ mhs, refresh }) {
   };
 
   const handleEditFormChange = (e) => {
-    e.persist(); // Keep the synthetic event persistently available
+    e.persist(); // Mantenha o evento sintético persistentemente disponível
     setEditFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -85,27 +98,45 @@ function DataTable({ mhs, refresh }) {
   };
 
   return (
-    <tr className="status">
-      <td
-        style={{
-          backgroundColor:
-            mhs.situacao === 'Aberto'
-              ? 'green'
+    <TableRow className={`status ${stripeRow(mhs)}`}>
+      <TableCell className="sit-flex">
+        <div className="document-info">
+        <FontAwesomeIcon icon={faFile} className="fa-solid fa-file document-icon"  />
+          {mhs.num_docto}
+        </div>
+        <div
+          className="situacao-info"
+          style={{
+            backgroundColor:
+              mhs.situacao === 'Aberto'
+                ? '#348fe2'
+                : mhs.situacao === 'Vencido'
+                ? 'orange'
+                : mhs.situacao === 'Recebida'
+                ? '#5cb85c'
+                : '',
+              boxShadow:
+              mhs.situacao === 'Aberto'
+              ? '0px 10px 14px -7px #0578dc'
               : mhs.situacao === 'Vencido'
-              ? 'orange'
+              ? '0px 10px 13px -7px #b56f05'
               : mhs.situacao === 'Recebida'
-              ? 'red'
-              : ''
-        }}
-      >
-        {mhs.num_docto} {mhs.situacao}
-      </td>
-      <td>{mhs.fornecedor}</td>
-      <td>{mhs.dt_lancamento}</td>
-      <td>{mhs.dt_vencimento}</td>
-      <td>{mhs.valor}</td>
-      <td>{mhs.observacao}</td>
-      <td className="action-icons">
+              ? '0px 10px 14px -7px #3e7327'
+              : '',
+          }}
+        >
+          {mhs.situacao}
+        </div>
+      </TableCell>
+
+      <TableCell>{mhs.fornecedor}</TableCell>
+      <TableCell>{mhs.dt_lancamento}</TableCell>
+      <TableCell>
+        <span className="style-vencimento">{mhs.dt_vencimento}</span>
+      </TableCell>
+      <TableCell>R${mhs.valor}</TableCell>
+      <TableCell>{mhs.valor_recebido}</TableCell>
+      <TableCell className="action-icons">
         <i
           className="fa fa-pencil-square-o edit"
           id="Edit-icon"
@@ -117,16 +148,16 @@ function DataTable({ mhs, refresh }) {
           id="Delete-icon"
           onClick={deleteConfirm}
         ></i>
-      </td>
+      </TableCell>
 
       <EditModal
         show={showEditModal}
         handleClose={handleEditModalClose}
-        formData={editFormData} // Atualizado para editFormData em vez de formData
-        handleChange={handleEditFormChange} // Atualizado para handleEditFormChange em vez de handleChange
+        formData={editFormData}
+        handleChange={handleEditFormChange}
         handleSubmit={handleEditFormSubmit}
       />
-    </tr>
+    </TableRow>
   );
 }
 

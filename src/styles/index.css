@@ -1,18 +1,49 @@
-#Delete-icon{
-    font-size: larger;
-    color: brown;
-}
 .action-icons{
-    display: flex;
-    justify-content: space-between;
-    gap: 40%;
+  display: flex;
+  
+}
+
+#Delete-icon{
+  box-shadow: 0px 10px 13px -7px #ed1515;
+	background:linear-gradient(to bottom, #f0182a 5%, #e63333 100%);
+	background-color:#f0182a;
+	border-radius:4px;
+	border:1px solid #f01818;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 9px;
+  margin-left: 5px;
+}
+
+#Delete-icon:hover {
+	background:linear-gradient(to bottom, #e63333 5%, #f0182a 100%);
+	background-color:#e63333;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
 }
 
 #Edit-icon{
-    display: flex;
-    justify-content: center;
-    text-align: center;
+  box-shadow: 0px 10px 14px -7px #3e7327;
+	background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+	background-color:#77b55a;
+	border-radius:4px;
+	border:1px solid #4b8f29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px 8px;
+  width: fit-content;
+  margin-right: 5px;
 }
+
+#Edit-icon:hover {
+	background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+	background-color:#72b352;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
 .edit{
     background: #8fd591;
     border-radius: 20%;
@@ -68,12 +99,15 @@
     width: 100%;
   }
 
+.nav-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
 .nav{
     display: flex;
-    justify-content: left;
-    width: 50%;
-    padding-top: 30px;
-    padding-left:200px;
+    justify-content: space-between;
+    width: 60%;
 }
 
 
@@ -121,4 +155,60 @@
 .button-28:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+
+
+.odd-row {
+  background-color: #f5f5f5;
+}
+
+.even-row {
+  background-color: #ffffff;
+}
+
+.document-icon{
+  padding-right: 4px;
+  color: rgb(56, 61, 61);
+}
+
+.sit-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50%;
+}
+
+.document-info {
+  display: flex;
+  align-items: center;
+}
+
+.situacao-info {
+  width: fit-content;
+  color: white;
+  text-align: right;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 95%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em
+}
+
+.style-vencimento{
+  color: red;
+}
+
+.cabecalho{
+  font-weight: bold;
+}
+
+.table-row-stripe {
+  background-color: #827575;
 }
