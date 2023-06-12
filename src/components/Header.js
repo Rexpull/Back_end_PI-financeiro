@@ -6,9 +6,10 @@ import API from '../axios/Api';
 import 'react-datepicker/dist/react-datepicker.css';
 import CurrencyInputField from 'react-currency-input-field';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
+
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -24,6 +25,8 @@ function Header() {
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+
+  const handleShow = () => setShow(true);
 
   const handleClose = () => {
     setShow(false);
@@ -70,6 +73,7 @@ function Header() {
       console.log('Data inválida');
     }
   };
+  
 
   const verificarSituacao = () => {
     const now = new Date();
@@ -89,11 +93,12 @@ function Header() {
     const situacao = verificarSituacao();
 
     const formattedData = {
-        ...formData,
-        dt_lancamento: startDate ? startDate.toISOString().split('T')[0] : '',
-        dt_vencimento: endDate ? endDate.toISOString().split('T')[0] : '',
-        situacao: situacao
-      };
+      ...formData,
+      dt_lancamento: startDate ? format(startDate, 'yyyy-MM-dd') : '',
+      dt_vencimento: endDate ? format(endDate, 'yyyy-MM-dd') : '',
+      situacao: situacao
+    };
+    
 
     try {
       const response = await API.post('/addmhs.php', formattedData, {
@@ -113,11 +118,14 @@ function Header() {
 
   return (
     <>
-      
-
+      <div className="nav">
+              <button onClick={handleShow} className="button-28">
+                <FontAwesomeIcon icon={faPlus} className="fa-icon-plus" /> Lançar conta
+              </button>
+      </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Adicionar Cadastro</Modal.Title>
+          <Modal.Title><FontAwesomeIcon icon={faPlus} className="fa-icon-plus" color='green' /> Adicionar Cadastro</Modal.Title>
           <Button variant="link" className="close-btn" onClick={handleClose}>
             <FontAwesomeIcon icon={faTimes} className="fa-icon-xmark" />
           </Button>
@@ -158,7 +166,7 @@ function Header() {
                 className="form-control"
                 selected={startDate}
                 onChange={(date) => handleDateChange('dt_lancamento', date)}
-                dateFormat="yyyy-MM-dd"
+                dateFormat="dd-MM-yyyy"
                 placeholderText="Selecione a data"
                 required
               />
@@ -171,7 +179,7 @@ function Header() {
                 className="form-control"
                 selected={endDate}
                 onChange={(date) => handleDateChange('dt_vencimento', date)}
-                dateFormat="yyyy-MM-dd"
+                dateFormat="dd-MM-yyyy"
                 placeholderText="Selecione a data"
                 required
               />

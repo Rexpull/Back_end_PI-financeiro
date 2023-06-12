@@ -4,7 +4,6 @@ import { TableRow, TableCell } from '@mui/material';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
 import '../styles/index.css';
 import EditModal from './EditModal';
 
@@ -101,7 +100,7 @@ function DataTable({ mhs, refresh }) {
     <TableRow className={`status ${stripeRow(mhs)}`}>
       <TableCell className="sit-flex">
         <div className="document-info">
-        <FontAwesomeIcon icon={faFile} className="fa-solid fa-file document-icon"  />
+        <FontAwesomeIcon icon="fa-solid fa-file" className='document-icon' />
           {mhs.num_docto}
         </div>
         <div

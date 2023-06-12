@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import API from '../axios/Api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import {
   Table,
   TableHead,
@@ -14,6 +12,7 @@ import {
 } from '@mui/material';
 import DataTable from './DataTable';
 
+
 const DaftarMhs = () => {
   const [mhs, setMhs] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -22,9 +21,6 @@ const DaftarMhs = () => {
   const [order, setOrder] = useState('asc');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     fetchData();
@@ -106,25 +102,23 @@ const DaftarMhs = () => {
 });
 
   return (
+
+
+
+
+    
     <div className="container" style={{ marginTop: '20px' }}>
       <div className="row">
         <div className="col-lg-12">
-          <div className="nav-bar">
-            <div className="nav">
-              <button onClick={handleShow} className="button-28">
-                <FontAwesomeIcon icon={faPlus} className="fa-icon-plus" /> Criar novo
-              </button>
-            </div>
 
-            <TextField
+            <TextField 
               id="search"
               label="Filtrar"
               variant="outlined"
               onChange={handleSearchChange}
               style={{ marginBottom: '10px' }}
             />
-          </div>
-          <Table>
+          <Table className='white'>
             <TableHead>
               <TableRow>
                 <TableCell>
@@ -180,7 +174,7 @@ const DaftarMhs = () => {
             <TableBody>{renderData}</TableBody>
           </Table>
 
-          <TablePagination
+          <TablePagination className='white'
             rowsPerPageOptions={[10, 20, 30]}
             component="div"
             count={filteredData.length}
@@ -192,6 +186,8 @@ const DaftarMhs = () => {
         </div>
       </div>
     </div>
+
+
   );
 };
 
